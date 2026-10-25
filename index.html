@@ -95,15 +95,27 @@
               </label>
             </li>
           </ul>
-
+<div class="fields">
+  <label>Seu nome
+    <input name="nome" type="text" required minlength="2" maxlength="80" autocomplete="name" />
+  </label>
+  <label>Telefone
+    <input name="telefone" type="tel" required minlength="8" maxlength="20" autocomplete="tel" />
+  </label>
+  <label>Dia e horário
+    <input name="data_hora" type="datetime-local" required />
+  </label>
+</div>
           <div class="summary">
             <p class="total">
               Total <strong id="total">R$ 0</strong>
             </p>
+            <button class="btn" type="submit" id="send">Agendar</button>
             <a class="btn btn-wa" id="wa" href="#servicos" aria-disabled="true">
               Escolha um serviço
             </a>
           </div>
+          <p id="msg" role="status"></p>
         </form>
       </section>
 

@@ -1,3 +1,4 @@
+import { supabase } from "./supabase.js";
 // Número de exemplo. Troque pelo seu, só dígitos, com código do país (55) e DDD.
 const WHATSAPP = "5562981894664";
 
@@ -87,7 +88,35 @@ function setupBooking() {
   }
 
   form.addEventListener("change", refresh);
-  form.addEventListener("submit", (e) => e.preventDefault());
+    form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const msg = document.getElementById("msg");
+    const send = document.getElementById("send");
+    const checked = [...form.querySelectorAll("input[name=servico]:checked")];
+    if (checked.length === 0) {
+      msg.textContent = "Marque pelo menos um serviço.";
+      return;
+    }
+    const data = new FormData(form);
+    send.disabled = true;
+    msg.textContent = "Enviando…";
+    const { error } = await supabase.from("agendamentos").insert({
+      nome: data.get("nome").trim(),
+      telefone: data.get("telefone").trim(),
+      servicos: checked.map((i) => i.value),
+      data_hora: new Date(data.get("data_hora")).toISOString(),
+      total: checked.reduce((s, i) => s + Number(i.dataset.price), 0),
+    });
+    send.disabled = false;
+    if (error) {
+      msg.textContent = "Não foi possível agendar. Tente de novo ou use o WhatsApp.";
+      console.error(error);
+    } else {
+      msg.textContent = "Agendado! Vamos confirmar pelo WhatsApp.";
+      form.reset();
+      refresh();
+    }
+  });
   refresh();
 }
 
