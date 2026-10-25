@@ -12,13 +12,14 @@ _Troque a imagem acima por um print real do site publicado (crie a pasta `docs/`
 
 - Mostra se a barbearia está aberta agora, usando o fuso de São Paulo.
 - Calcula o total dos serviços marcados.
+- Grava o agendamento (nome, telefone, serviços, dia e horário) num banco de dados Supabase.
 - Monta uma mensagem de agendamento e abre o WhatsApp com ela.
 - Destaca o dia de hoje na tabela de horários.
 - Funciona em celular e computador, respeita `prefers-reduced-motion` e tem foco visível para teclado.
 
 ## Tecnologias
 
-HTML, CSS e JavaScript puro, empacotados com [Vite](https://vite.dev). Sem banco de dados e sem variáveis de ambiente por enquanto.
+HTML, CSS e JavaScript puro, empacotados com [Vite](https://vite.dev). Banco de dados no [Supabase](https://supabase.com), com regras de acesso (RLS) que permitem aos visitantes só criar agendamentos, nunca ler os de outros clientes.
 
 ## Rodar localmente
 
