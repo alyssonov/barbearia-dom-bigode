@@ -1,0 +1,13 @@
+# Dependências e build
+node_modules
+dist
+
+# Segredos: nunca envie estes arquivos ao GitHub
+.env
+.env.*
+!.env.example
+
+# Sistema e editor
+.DS_Store
+*.log
+.vscode
