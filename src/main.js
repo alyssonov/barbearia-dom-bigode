@@ -1,5 +1,5 @@
 // Número de exemplo. Troque pelo seu, só dígitos, com código do país (55) e DDD.
-const WHATSAPP = "5500000000000";
+const WHATSAPP = "5562981894664";
 
 // Horário de funcionamento por dia da semana (0 = domingo). Horas em formato 24h.
 const HOURS = {
