@@ -2,7 +2,7 @@
 
 Site de uma barbearia fictícia que resolve um problema comum: o cliente quer saber preço e horário sem precisar mandar três mensagens. Ele marca os serviços, vê o total na hora e abre o WhatsApp já com o pedido escrito.
 
-**Site no ar:** _cole aqui o link da Vercel depois da publicação_
+**Site no ar:** https://barbearia-dom-bigode-one.vercel.app/
 
 ![Captura de tela do site](docs/screenshot.png)
 
