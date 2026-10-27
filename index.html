@@ -102,9 +102,14 @@
   <label>Telefone
     <input name="telefone" type="tel" required minlength="8" maxlength="20" autocomplete="tel" />
   </label>
-  <label>Dia e horário
-    <input name="data_hora" type="datetime-local" required />
-  </label>
+  <label>Dia
+  <input name="dia" type="date" required />
+</label>
+<label>Horário
+  <select name="hora" required disabled>
+    <option value="">Escolha o dia primeiro</option>
+  </select>
+</label>
 </div>
           <div class="summary">
             <p class="total">
