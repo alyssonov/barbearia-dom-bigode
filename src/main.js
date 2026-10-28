@@ -172,11 +172,16 @@ function setupBooking() {
       msg.textContent = erroHorario;
       return;
     }
+        const telefone = validarTelefone(data.get("telefone"));
+    if (telefone.erro) {
+      msg.textContent = telefone.erro;
+      return;
+    }
     send.disabled = true;
     msg.textContent = "Enviando…";
     const { error } = await supabase.from("agendamentos").insert({
       nome: data.get("nome").trim(),
-      telefone: data.get("telefone").trim(),
+      telefone: telefone.numeros,
       servicos: checked.map((i) => i.value),
       data_hora: new Date(valor).toISOString(),
       total: checked.reduce((s, i) => s + Number(i.dataset.price), 0),
@@ -206,3 +211,29 @@ updateStatus();
 setInterval(updateStatus, 60_000);
 setupBooking();
 preencherHorarios();
+function mascararTelefone(valor) {
+  const n = valor.replace(/\D/g, "").slice(0, 11);
+  if (n.length <= 2) return n;
+  if (n.length <= 6) return `(${n.slice(0, 2)}) ${n.slice(2)}`;
+  if (n.length <= 10) return `(${n.slice(0, 2)}) ${n.slice(2, 6)}-${n.slice(6)}`;
+  return `(${n.slice(0, 2)}) ${n.slice(2, 7)}-${n.slice(7)}`;
+}
+
+function validarTelefone(valor) {
+  const numeros = valor.replace(/\D/g, "");
+  if (numeros.length < 10 || numeros.length > 11) {
+    return { erro: "Digite o telefone com DDD, por exemplo (62) 98189-4664." };
+  }
+  if (Number(numeros.slice(0, 2)) < 11) {
+    return { erro: "O DDD parece inválido. Confira os dois primeiros números." };
+  }
+  if (numeros.length === 11 && numeros[2] !== "9") {
+    return { erro: "Celular com DDD tem 9 dígitos e o número começa com 9." };
+  }
+  return { numeros };
+}
+
+const campoTelefone = document.querySelector("input[name=telefone]");
+campoTelefone.addEventListener("input", () => {
+  campoTelefone.value = mascararTelefone(campoTelefone.value);
+});
