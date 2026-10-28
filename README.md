@@ -13,9 +13,17 @@ _Troque a imagem acima por um print real do site publicado (crie a pasta `docs/`
 - Mostra se a barbearia está aberta agora, usando o fuso de São Paulo.
 - Calcula o total dos serviços marcados.
 - Grava o agendamento (nome, telefone, serviços, dia e horário) num banco de dados Supabase.
+- Mostra só horários válidos: de 30 em 30 minutos, dentro do expediente, sem datas passadas, e com os já reservados em cinza.
+- Valida nome e telefone (formato brasileiro, com DDD) e explica o que corrigir.
 - Monta uma mensagem de agendamento e abre o WhatsApp com ela.
 - Destaca o dia de hoje na tabela de horários.
 - Funciona em celular e computador, respeita `prefers-reduced-motion` e tem foco visível para teclado.
+
+## Regras de agendamento
+
+- Um agendamento por dia e horário (regra no banco de dados).
+- Atendimento: terça a sexta, 9h às 20h; sábado, 8h às 18h; domingo e segunda fechado. O último horário é 30 minutos antes de fechar.
+- Os visitantes só conseguem criar agendamentos. Quem lê os dados é o dono, pelo painel do Supabase. O site só consulta quais horários estão ocupados, sem acesso a nome ou telefone.
 
 ## Tecnologias
 
