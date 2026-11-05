@@ -11,3 +11,7 @@ dist
 .DS_Store
 *.log
 .vscode
+.claude/reports/
+.claude/approvals/
+node_modules/
+dist/
